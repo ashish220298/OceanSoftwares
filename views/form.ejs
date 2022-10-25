@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Simple Form...</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="back_btn">
+            <a href="/"><button class="btn btn-default">Back</button></a>
+        </div> 
+        <h3 align="center">Add New Item</h3>   
+        <div class="card">
+            <form method="post" action="/formpost" onsubmit="return validate()">
+                <div class="form-group">
+                    <label>Name <sup>*</sup></label>
+                    <input type="text" name="name" id="name" placeholder="Enter Name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Mobile No <sup>*</sup></label>
+                    <input type="text" name="mobile" id="mobile" class="form-control" placeholder="Enter Mobile No">
+                </div>
+                <div class="form-group">
+                    <label>Email <sup>*</sup></label>
+                    <input type="email" name="email" id="email" placeholder="Enter Email" class="form-control">
+                </div>
+            
+                <div class="form-group">
+                    <label>Amount <sup>*</sup></label>
+                    <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount">
+                </div>
+
+                <div class="form-group">
+                    <label>Select Color <sup>*</sup></label><br>
+                    <input type="checkbox" name="color[]" value="Blue"> Blue
+                    <input type="checkbox" name="color[]" value="Pink"> Pink
+                    <input type="checkbox" name="color[]" value="Yellow"> Yellow
+                    <input type="checkbox" name="color[]" value="Red"> Red
+                </div>
+
+                <div class="form-group">
+                    <label>Select Size <sup>*</sup></label><br>
+                    <input type="checkbox" name="size[]" value="Small"> Small
+                    <input type="checkbox" name="size[]" value="Medium"> Medium
+                    <input type="checkbox" name="size[]" value="Large"> Large
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" name="submit" value="Submit" class="btn btn-lg btn-success">
+                            
+                </div>
+            </form>    
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function validate(){
+        let name = document.getElementById('name');
+        let mobile = document.getElementById('mobile').value;
+        let email = document.getElementById('email').value;
+        let amount = document.getElementById('amount').value;
+        console.log(mobile.length)
+        if(name.value == ""){
+            alert("Name is required!");
+            return false;
+        }
+        if(isNaN(mobile) == true){
+            alert("Mobile No must be Numerical!");
+            return false;
+        }
+        if(mobile.length == 0){
+            alert("Mobile No is required!");
+            return false;
+
+        }
+        if(mobile.length!=10){
+            alert("Mobile No must be 10 Digits!")
+            return false;
+        }
+        if(email == ""){
+            alert("Email is required!");
+            return false;
+
+        }
+        if(isNaN(amount) == true){
+            alert("Amount must be Numerical!");
+            return false;
+
+        }
+        if(amount.length == 0){
+            alert("Amount is required!");
+            return false;
+        }
+
+        let colorcheck = document.querySelectorAll('input[type="checkbox"][name="color[]"]')
+        let color_error = true;
+        colorcheck.forEach(item => { 
+                if (item.checked) {  
+                    color_error = false;
+                }
+            });
+            if (color_error) {
+                alert("Minimum one color you have to pick..");
+                return false;
+            }
+
+            let sizecheck = document.querySelectorAll('input[type="checkbox"][name="size[]"]')
+        let size_error = true;
+        sizecheck.forEach(item => { 
+                if (item.checked) {  
+                    size_error = false;
+                }
+            });
+            if (size_error) {
+                alert("Minimum one Size you have to pick..");
+                return false;
+            }
+           
+    }
+</script>
+
+<style>
+    .card {
+        margin: 20px auto;
+        width: 500px;
+        box-shadow: 0px 0px 2px 2px lightgrey;
+        padding: 20px;
+    }
+    .back_btn{
+        margin-top: 30px;
+        margin-left: 315px;
+    }
+
+    label sup{
+        color: red !important;
+        font-size: 14px;
+    }
+</style>
